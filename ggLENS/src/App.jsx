@@ -58,7 +58,7 @@ function App() {
         const data = await res.json()
         console.log('Upload response:', data)
       } catch (err) {
-        console.error('Error sending photo:', err)
+        console.error('Error sending photo11:', err)
       }
     }
 
