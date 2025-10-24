@@ -31,17 +31,20 @@ app.post("/image" , upload.single("photo") , async (req , res)=>{
     // Step 2: Send to FastAPI
 
     const formData = new FormData();
-    formData.append("file", fs.createReadStream(filePath));
+    formData.append("file", fs.createReadStream(filePath) , fileName);
 
 
     const response = await axios.post(
-      "http://127.0.0.1:5000/upload/",
+      "http://127.0.0.1:5000/upload",
       formData,
       {
-        headers: formData.getHeaders()
+        headers: formData.getHeaders(),
+        timeout:5000
       }
     );
-     console.log("uploaded file info:", req.file)
+     console.log(22)
+     console.log("response from the flask API server" , response.data)
+     console.log("uploaded file info1111:", req.file)
      // req.file.path or req.file.filename can be used to reference the saved file
      res.status(201).json({ message: "photo received and send to fastAPI servera", file: req.file.filename })
    } catch (error) {
